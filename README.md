@@ -1,4 +1,4 @@
-# Travel-assistant MLOps homework
+# Travel-assistant MLOps homework (Deadline: June 8)
 
 A travel assistant built to be evaluated and monitored (and jailbroken) properly.
 
