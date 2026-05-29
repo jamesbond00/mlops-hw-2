@@ -34,6 +34,7 @@ class _Stage:
     model: ModelSpec
     system_prompt: str
     role: str
+    enable_thinking: bool
 
 
 def _call(client: OpenAI, stage: _Stage, user_content: str) -> tuple[str, ModelCall]:
@@ -45,7 +46,12 @@ def _call(client: OpenAI, stage: _Stage, user_content: str) -> tuple[str, ModelC
             {"role": "user", "content": user_content},
         ],
         temperature=stage.model.temperature,
-        max_tokens=stage.model.max_tokens,
+        # Nemotron is a reasoning model. The gates (classifier/validator) emit a
+        # single terse label and must not burn tokens thinking — thinking off.
+        # The main assistant needs to reason about answer-vs-refuse, so it keeps
+        # thinking on; without it, a strict refusal prompt over-refuses real
+        # travel questions.
+        extra_body={"chat_template_kwargs": {"enable_thinking": stage.enable_thinking}},
     )
     elapsed = time.perf_counter() - start
     text = completion.choices[0].message.content or ""
@@ -144,6 +150,7 @@ def _classifier_stage(spec: ClassifierSpec, role: str) -> _Stage:
         model=spec.model,
         system_prompt=spec.prompt,
         role=role,
+        enable_thinking=False,  # cheap one-label gate; reasoning would only add cost
     )
 
 
@@ -156,6 +163,7 @@ def build_pipeline(config: AssistantConfig) -> Pipeline:
         model=config.model,
         system_prompt=config.system_prompt,
         role="main_assistant",
+        enable_thinking=True,  # must reason about answer-vs-refuse on each request
     )
 
     g = config.guardrail

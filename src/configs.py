@@ -32,7 +32,6 @@ class ModelSpec(BaseModel):
     model_config = ConfigDict(extra="forbid")
     name: str
     temperature: float = 0.0
-    max_tokens: int = 512
 
 
 class ClassifierSpec(BaseModel):

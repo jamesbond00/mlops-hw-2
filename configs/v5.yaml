@@ -3,7 +3,6 @@ description: "Input classifier in front + output validator behind. Defense in de
 model:
   name: nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B
   temperature: 0.0
-  max_tokens: 512
 system_prompt: prompts/v2_explicit_refusal.txt
 guardrail:
   type: sandwich
@@ -11,11 +10,9 @@ guardrail:
     model:
       name: nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B
       temperature: 0.0
-      max_tokens: 8
     prompt: prompts/classifier_input.txt
   output_validator:
     model:
       name: nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B
       temperature: 0.0
-      max_tokens: 8
     prompt: prompts/classifier_output.txt

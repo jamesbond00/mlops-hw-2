@@ -3,7 +3,6 @@ description: "Minimal Emeli baseline; no guardrails."
 model:
   name: nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B
   temperature: 0.0
-  max_tokens: 512
 system_prompt: prompts/v1_baseline.txt
 guardrail:
   type: none

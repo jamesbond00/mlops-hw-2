@@ -3,7 +3,6 @@ description: "Long anti-jailbreak rules in system prompt. Kept as a foil to show
 model:
   name: nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B
   temperature: 0.0
-  max_tokens: 512
 system_prompt: prompts/v3_prompt_hardening.txt
 guardrail:
   type: none

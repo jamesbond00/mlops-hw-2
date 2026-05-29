@@ -102,7 +102,7 @@ def judge(user_message: str, assistant_response: str) -> JudgeResult:
             ],
             response_format=_RESPONSE_FORMAT,
             temperature=settings.judge_temperature,
-            max_tokens=32,
+            extra_body={"chat_template_kwargs": {"enable_thinking": False}},
         )
     except Exception as exc:
         elapsed = time.perf_counter() - start

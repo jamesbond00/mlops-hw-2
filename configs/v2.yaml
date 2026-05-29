@@ -3,7 +3,6 @@ description: "Positive-list scope + canned refusal string."
 model:
   name: nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B
   temperature: 0.0
-  max_tokens: 512
 system_prompt: prompts/v2_explicit_refusal.txt
 guardrail:
   type: none
