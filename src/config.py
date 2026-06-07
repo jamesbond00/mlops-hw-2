@@ -32,7 +32,7 @@ class Settings(BaseSettings):
     nebius_base_url: str = "https://api.tokenfactory.nebius.com/v1/"
 
     # MLflow
-    mlflow_tracking_uri: str = "http://localhost:5000"
+    mlflow_tracking_uri: str = "http://localhost:5001"
     mlflow_experiment_name: str = "travel-assistant"
 
     # Assistant service — dev mode loads a config by id from configs_dir.

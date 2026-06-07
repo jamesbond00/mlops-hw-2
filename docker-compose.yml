@@ -62,7 +62,7 @@ services:
       --host 0.0.0.0
       --port 5000
     ports:
-      - "5000:5000"
+      - "${MLFLOW_HOST_PORT:-5001}:5000"
 
   prometheus:
     # Pulled from Quay rather than Docker Hub — Hub's CloudFront edge
@@ -81,6 +81,7 @@ services:
     # unreliable from some regions for the grafana/grafana image. The mirror
     # is maintained by .github/workflows/mirror-images.yml.
     image: ghcr.io/st-fedotov/mlops-grafana:latest
+    platform: linux/amd64
     restart: unless-stopped
     depends_on:
       - prometheus
